@@ -5,6 +5,8 @@ colors
 # enable colored output from ls, etc
 export CLICOLOR=1
 
+setopt promptsubst
+
 # modify the prompt to contain git branch name if applicable
 git_prompt_info() {
   current_branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
@@ -13,7 +15,6 @@ git_prompt_info() {
   fi
 }
 
-setopt promptsubst
 PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%# "
 RPROMPT="$(git_prompt_info)"
 
