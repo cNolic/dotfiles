@@ -8,15 +8,38 @@ export CLICOLOR=1
 setopt promptsubst
 
 # modify the prompt to contain git branch name if applicable
-git_prompt_info() {
-  current_branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
-  if [[ -n $current_branch ]]; then
-    echo "%{$fg[blue]%}$current_branch%{$reset_color%}"
+_git_status() {
+  git_status=$(LANG=en_US.UTF-8 git status 2> /dev/null)
+  if [ -n "$(echo $git_status | grep "Changes not staged")" ]; then
+    echo "changed"
+  elif [ -n "$(echo $git_status | grep "Changes to be committed")" ]; then
+    echo "pending"
+  elif [ -n "$(echo $git_status | grep "Untracked files")" ]; then
+    echo "untracked"
+  else
+    echo "unchanged"
   fi
 }
 
-PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%# "
-RPROMPT="$(git_prompt_info)"
+_git_prompt_info() {
+  current_branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+  if [[ -n $current_branch ]]; then
+    current_git_status=$(_git_status)
+    if [ "unchanged" = $current_git_status ]; then
+      echo " %{$fg[green]%}$current_branch%{$reset_color%}"
+    elif [ "pending" = $current_git_status ]; then
+       echo " %{$fg[yellow]%}$current_branch%{$reset_color%}"
+    elif [ "changed" = $current_git_status ]; then
+      echo " %{$fg[red]%}$current_branch%{$reset_color%}"
+    elif [ "untracked" = $current_git_status ]; then
+      echo " %{$fg[cyan]%}$current_branch%{$reset_color%}"
+    else
+      echo " $current_branch"
+    fi
+  fi
+}
+
+export PS1='%{$fg[green]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[yellow]%}%1~%{$reset_color%}$(_git_prompt_info) %# '
 
 # load completion functions
 fpath=(~/.zsh/completion $fpath)
