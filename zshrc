@@ -71,3 +71,5 @@ bindkey "^N" insert-last-word
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
+# rbenv
+eval "$(rbenv init -)"
