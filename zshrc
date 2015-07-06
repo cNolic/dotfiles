@@ -74,5 +74,17 @@ bindkey "^N" insert-last-word
 # rbenv
 eval "$(rbenv init -)"
 
+# predict
+autoload predict-on
+zle -N predict-on
+zle -N predict-off
+bindkey ^Z   predict-on
+bindkey ^X^Z predict-off
+zstyle ':predict' verbose true
+
+# spell correction
+setopt correct
+
+# QUILT
 export QUILT_PATCHES="debian/patches"
 export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"
