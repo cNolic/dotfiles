@@ -1,0 +1,8 @@
+[alias]
+ aa = add --all
+ s = status --branch --short
+ co = checkout
+ ci = commit
+ ca = commit --amend
+[include]
+  path=~/.gitconfig.identity
