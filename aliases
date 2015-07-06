@@ -1,1 +1,3 @@
-alias ll="ls -alh"
+alias l="ls -F"
+alias ll="ls -lFh"
+alias la="ls -laFh"
