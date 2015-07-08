@@ -11,6 +11,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
+Plugin 'ngmy/vim-rubocop'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -51,3 +52,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Vim Rubocop configuration
+let g:vimrubocop_keymap = 0
+nmap <Leader>r :RuboCop<CR>
