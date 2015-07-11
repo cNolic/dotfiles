@@ -12,6 +12,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
 Plugin 'ngmy/vim-rubocop'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'jgdavey/tslime.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -56,3 +58,10 @@ let g:syntastic_check_on_wq = 0
 " Vim Rubocop configuration
 let g:vimrubocop_keymap = 0
 nmap <Leader>r :RuboCop<CR>
+
+" Rspec
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
