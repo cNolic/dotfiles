@@ -1,3 +1,3 @@
 export EDITOR=vim
-export EDITOR=$VISUAL
+export VISUAL=$EDITOR
 export PATH="$HOME/.bin:$HOME/.rbenv/bin:$PATH"
