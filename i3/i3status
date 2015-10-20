@@ -1,0 +1,41 @@
+general {
+        colors = true
+        interval = 5
+        color_good = "#96BE65"
+        color_bad  = "#BE7765"
+        color_degraded = "#FCD384"
+}
+
+order += "ipv6"
+order += "disk /"
+order += "disk /home"
+order += "run_watch DHCP"
+order += "wireless wlp4s0"
+order += "load"
+order += "tztime local"
+
+wireless wlp4s0 {
+        format_up = "W: (%quality at %essid, %bitrate) %ip"
+        format_down = "W: down"
+}
+
+run_watch DHCP {
+        pidfile = "/var/run/dhclient*.pid"
+}
+
+tztime local {
+        format = "%A %d-%m-%Y %H:%M:%S"
+}
+
+
+load {
+        format = "%5min"
+}
+
+disk "/" {
+        format = "/ %free"
+}
+
+disk "/home" {
+        format = "/home %free"
+}

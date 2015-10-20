@@ -15,6 +15,8 @@ Plugin 'ngmy/vim-rubocop'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'nanotech/jellybeans.vim'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -30,7 +32,10 @@ set laststatus=2
 " Colors
 syntax enable
 set background=dark
-colorscheme solarized
+set t_Co=256
+let g:solarized_termcolors=256
+colorscheme jellybeans
+hi Normal ctermbg=none
 
 
 " Softtabs, 2 spaces

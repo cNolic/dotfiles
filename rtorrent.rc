@@ -1,0 +1,32 @@
+#download_rate = 500
+upload_rate = 80
+
+min_peers = 80
+max_peers = 104
+
+min_peers_seed = 20
+max_peers_seed = 104
+
+max_uploads = 14
+
+directory = ~/torrents/downloading
+
+session = ~/torrents/session
+
+port_range = 6881-6999
+port_random = no
+
+# Vérification des données à la fin du téléchargement
+check_hash = yes
+
+# Ce répertoire contient les fichiers .torrent. 
+# Dès qu'un nouveau .torrent y est ajouté, le téléchargement commence.
+schedule = watch_directory,5,5,load_start=~/torrents/watch/*.torrent
+schedule = low_diskspace,5,60,close_low_diskspace=10G
+system.method.set_key = event.download.finished,move_complete,"d.set_directory=~/torrents/complete/;execute=mv,-u,$d.get_base_path=,~/torrents/complete/"
+
+dht = auto
+
+dht_port = 6880
+
+encryption = allow_incoming,try_outgoing,enable_retry
